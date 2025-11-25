@@ -13,21 +13,21 @@ public final class RoomServicesMapper {
 
     public static RoomServicesDTO toDTO(RoomServices entity) {
         if (entity == null) return null;
-        String createdAt = entity.getCreatedAt() == null ? Instant.now().toString() : entity.getCreatedAt();
+        String createdAt = entity.getCreated_at() == null ? Instant.now().toString() : entity.getCreated_at();
         return new RoomServicesDTO(
                 entity.getId(),
-                entity.getServiceId(),
-                entity.getRoomId(),
+                entity.getService_id(),
+                entity.getRoom_id(),
                 createdAt
         );
     }
 
     public static RoomServices toEntity(RoomServicesDTO dto) {
         if (dto == null) return null;
-        String createdAt = dto.createdAt() == null ? Instant.now().toString() : dto.createdAt();
+        String createdAt = dto.created_at() == null ? Instant.now().toString() : dto.created_at();
         return new RoomServices(
-                dto.serviceId(),
-                dto.roomId(),
+                dto.service_id(),
+                dto.room_id(),
                 createdAt
         );
     }

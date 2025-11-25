@@ -7,7 +7,6 @@ import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -20,21 +19,19 @@ public class Room {
     private UUID id;
     private String title;
     private String description;
-    private String roomType;
-    private UUID availabilityDatesId;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private String room_type;
+    private LocalDateTime created_at;
+    private LocalDateTime updated_at;
 
     public Room(){
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
+        this.created_at = LocalDateTime.now();
+        this.updated_at = LocalDateTime.now();
     }
-    public Room(String title, String description, String roomType, UUID availabilityDatesId) {
+    public Room(String title, String description, String room_type) {
         this.title = title;
         this.description = description;
-        this.roomType = roomType;
-        this.availabilityDatesId = availabilityDatesId;
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
+        this.room_type = room_type;
+        this.created_at = LocalDateTime.now();
+        this.updated_at = LocalDateTime.now();
     }
 }

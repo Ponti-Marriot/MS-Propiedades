@@ -7,9 +7,8 @@ public record RoomDTO(
         UUID id,
         String title,
         String description,
-        String roomType,
-        UUID availabilityDatesId,
-        LocalDateTime createdAt,
-        LocalDateTime updatedAt
+        String room_type,
+        LocalDateTime created_at,
+        LocalDateTime updated_at
 ) {
 }

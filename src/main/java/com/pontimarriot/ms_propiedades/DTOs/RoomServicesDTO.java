@@ -4,8 +4,8 @@ import java.util.UUID;
 
 public record RoomServicesDTO(
         UUID id,
-        UUID serviceId,
-        UUID roomId,
-        String createdAt
+        UUID service_id,
+        UUID room_id,
+        String created_at
 ) {
 }

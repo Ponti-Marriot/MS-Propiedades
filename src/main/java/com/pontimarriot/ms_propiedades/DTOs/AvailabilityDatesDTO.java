@@ -5,9 +5,9 @@ import java.util.UUID;
 
 public record AvailabilityDatesDTO(
         UUID id,
-        UUID roomId,
-        LocalDate startDate,
-        LocalDate endDate,
-        String createdAt
+        UUID hotelpropertiesrooms_id,
+        LocalDate start_date,
+        LocalDate finish_date,
+        String created_at
 ) {
 }

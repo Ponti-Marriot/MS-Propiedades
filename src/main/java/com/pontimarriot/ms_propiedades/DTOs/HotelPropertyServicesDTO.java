@@ -4,8 +4,7 @@ import java.util.UUID;
 
 public record HotelPropertyServicesDTO(
         UUID id,
-        UUID serviceId,
-        UUID hotelPropertyId,
-        String createdAt
+        UUID service_id,
+        UUID hotel_property_id
 ) {
 }

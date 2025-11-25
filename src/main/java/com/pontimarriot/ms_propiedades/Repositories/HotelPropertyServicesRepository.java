@@ -38,7 +38,7 @@ public class HotelPropertyServicesRepository {
     public Flux<HotelPropertyServices> findByServiceId(UUID serviceId) {
         return webClient.get()
                 .uri(uriBuilder -> uriBuilder.path("/hotel-property-services")
-                        .queryParam("serviceId", serviceId)
+                        .queryParam("service_id", serviceId)
                         .build())
                 .retrieve()
                 .bodyToFlux(HotelPropertyServices.class)
@@ -48,7 +48,7 @@ public class HotelPropertyServicesRepository {
     public Flux<HotelPropertyServices> findByHotelPropertyId(UUID hotelPropertyId) {
         return webClient.get()
                 .uri(uriBuilder -> uriBuilder.path("/hotel-property-services")
-                        .queryParam("hotelPropertyId", hotelPropertyId)
+                        .queryParam("hotel_property_id", hotelPropertyId)
                         .build())
                 .retrieve()
                 .bodyToFlux(HotelPropertyServices.class)

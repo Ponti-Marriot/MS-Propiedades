@@ -17,13 +17,13 @@ public class Status {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String name;
-    private String createdAt;
+    private String created_at;
 
     public Status() {
     }
 
-    public Status(String name, String createdAt) {
+    public Status(String name, String created_at) {
         this.name = name;
-        this.createdAt = createdAt;
+        this.created_at = created_at;
     }
 }

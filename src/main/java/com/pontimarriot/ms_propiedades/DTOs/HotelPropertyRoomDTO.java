@@ -4,12 +4,10 @@ import java.util.UUID;
 
 public record HotelPropertyRoomDTO(
         UUID id,
-        UUID hotelPropertyId,
-        UUID roomId,
-        UUID statusId,
-        double squareMeters,
+        UUID hotel_property_id,
+        UUID room_id,
         int bedrooms,
         int bathrooms,
-        double pricePerNight
+        double price_per_night
 ) {
 }

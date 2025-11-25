@@ -12,19 +12,9 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
-public class RoomServices {
+public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    private UUID service_id;
-    private UUID room_id;
-    private String created_at;
-
-    public RoomServices() {
-    }
-    public RoomServices(UUID service_id, UUID room_id, String created_at) {
-        this.service_id = service_id;
-        this.room_id = room_id;
-        this.created_at = created_at;
-    }
+    private String url;
 }

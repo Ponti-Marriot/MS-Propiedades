@@ -6,6 +6,6 @@ public record ServiceDTO(
         UUID id,
         String name,
         String category,
-        String description
+        String text
 ) {
 }

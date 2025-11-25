@@ -18,14 +18,14 @@ public class Service {
     private UUID id;
     private String name;
     private String category;
-    private String description;
+    private String text;
 
     public Service() {
     }
 
-    public Service(String name, String category, String description) {
+    public Service(String name, String category, String text) {
         this.name = name;
         this.category = category;
-        this.description = description;
+        this.text = text;
     }
 }

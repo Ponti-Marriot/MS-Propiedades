@@ -13,7 +13,7 @@ public final class StatusMapper {
 
     public static StatusDTO toDTO(Status entity) {
         if (entity == null) return null;
-        String createdAt = entity.getCreatedAt() == null ? Instant.now().toString() : entity.getCreatedAt();
+        String createdAt = entity.getCreated_at() == null ? Instant.now().toString() : entity.getCreated_at();
         return new StatusDTO(
                 entity.getId(),
                 entity.getName(),
@@ -23,7 +23,7 @@ public final class StatusMapper {
 
     public static Status toEntity(StatusDTO dto) {
         if (dto == null) return null;
-        String createdAt = dto.createdAt() == null ? Instant.now().toString() : dto.createdAt();
+        String createdAt = dto.created_at() == null ? Instant.now().toString() : dto.created_at();
         return new Status(
                 dto.name(),
                 createdAt

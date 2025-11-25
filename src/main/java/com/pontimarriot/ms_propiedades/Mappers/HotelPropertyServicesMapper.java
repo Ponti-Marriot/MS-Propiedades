@@ -13,22 +13,18 @@ public final class HotelPropertyServicesMapper {
 
     public static HotelPropertyServicesDTO toDTO(HotelPropertyServices entity) {
         if (entity == null) return null;
-        String createdAt = entity.getCreatedAt() == null ? Instant.now().toString() : entity.getCreatedAt();
         return new HotelPropertyServicesDTO(
                 entity.getId(),
-                entity.getServiceId(),
-                entity.getHotelPropertyId(),
-                createdAt
+                entity.getService_id(),
+                entity.getHotel_property_id()
         );
     }
 
     public static HotelPropertyServices toEntity(HotelPropertyServicesDTO dto) {
         if (dto == null) return null;
-        String createdAt = dto.createdAt() == null ? Instant.now().toString() : dto.createdAt();
         return new HotelPropertyServices(
-                dto.serviceId(),
-                dto.hotelPropertyId(),
-                createdAt
+                dto.service_id(),
+                dto.hotel_property_id()
         );
     }
 

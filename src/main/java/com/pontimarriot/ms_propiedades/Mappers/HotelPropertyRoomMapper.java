@@ -14,26 +14,22 @@ public final class HotelPropertyRoomMapper {
         if (entity == null) return null;
         return new HotelPropertyRoomDTO(
                 entity.getId(),
-                entity.getHotelPropertyId(),
-                entity.getRoomId(),
-                entity.getStatusId(),
-                entity.getSquareMeters(),
+                entity.getHotel_property_id(),
+                entity.getRoom_id(),
                 entity.getBedrooms(),
                 entity.getBathrooms(),
-                entity.getPricePerNight()
+                entity.getPrice_per_night()
         );
     }
 
     public static HotelPropertyRoom toEntity(HotelPropertyRoomDTO dto) {
         if (dto == null) return null;
         return new HotelPropertyRoom(
-                dto.hotelPropertyId(),
-                dto.roomId(),
-                dto.statusId(),
-                dto.squareMeters(),
+                dto.hotel_property_id(),
+                dto.room_id(),
                 dto.bedrooms(),
                 dto.bathrooms(),
-                dto.pricePerNight()
+                dto.price_per_night()
         );
     }
 

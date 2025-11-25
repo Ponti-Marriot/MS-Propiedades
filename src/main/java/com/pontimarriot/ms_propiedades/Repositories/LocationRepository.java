@@ -6,46 +6,31 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import reactor.core.scheduler.Schedulers;
 
-import java.util.List;
+import java.util.UUID;
 
 @Repository
 public class LocationRepository {
 
     private final WebClient webClient;
-    private final LocationJpaRepository jpa;
 
-    public LocationRepository(@Qualifier("propertiesWebClient") WebClient webClient,
-                              LocationJpaRepository jpa) {
+    public LocationRepository(@Qualifier("propertiesWebClient") WebClient webClient) {
         this.webClient = webClient;
-        this.jpa = jpa;
     }
 
-    /**
-     * Fetches all locations from the external service and saves them into the local H2 DB.
-     * Returns a Mono that completes when save finishes.
-     */
-    public Mono<Void> fetchAndSaveAll() {
+    public Flux<Location> findAll() {
         return webClient.get()
                 .uri("/locations")
                 .retrieve()
                 .bodyToFlux(Location.class)
-                .collectList()
-                .flatMap(list -> Mono.fromCallable(() -> {
-                    jpa.saveAll(list);
-                    return true;
-                }).subscribeOn(Schedulers.boundedElastic()))
-                .then()
-                .onErrorResume(e -> Mono.empty());
+                .onErrorResume(e -> Flux.empty());
     }
 
-    /**
-     * Returns locations already stored in the local DB as a reactive Flux.
-     */
-    public Flux<Location> findAllSaved() {
-        return Flux.defer(() -> Flux.fromIterable(jpa.findAll()))
-                .subscribeOn(Schedulers.boundedElastic())
-                .onErrorResume(e -> Flux.empty());
+    public Mono<Location> findById(UUID id) {
+        return webClient.get()
+                .uri("/locations/{id}", id)
+                .retrieve()
+                .bodyToMono(Location.class)
+                .onErrorResume(e -> Mono.empty());
     }
 }

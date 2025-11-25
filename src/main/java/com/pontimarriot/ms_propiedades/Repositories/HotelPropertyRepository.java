@@ -37,7 +37,7 @@ public class HotelPropertyRepository {
 
     public Flux<HotelProperty> findByLocationId(UUID locationId) {
         return webClient.get()
-                .uri(uriBuilder -> uriBuilder.path(baseUrl+"/properties").queryParam("locationId", locationId).build())
+                .uri(uriBuilder -> uriBuilder.path(baseUrl+"/properties").queryParam("location_id", locationId).build())
                 .retrieve()
                 .bodyToFlux(HotelProperty.class)
                 .onErrorResume(e -> Flux.empty());

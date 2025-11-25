@@ -14,20 +14,20 @@ public final class AvailabilityDatesMapper {
         if (entity == null) return null;
         return new AvailabilityDatesDTO(
                 entity.getId(),
-                entity.getRoomId(),
-                entity.getStartDate(),
-                entity.getEndDate(),
-                entity.getCreatedAt()
+                entity.getHotelpropertiesrooms_id(),
+                entity.getStart_date(),
+                entity.getFinish_date(),
+                entity.getCreated_at()
         );
     }
 
     public static AvailabilityDates toEntity(AvailabilityDatesDTO dto) {
         if (dto == null) return null;
         return new AvailabilityDates(
-                dto.roomId(),
-                dto.startDate(),
-                dto.endDate(),
-                dto.createdAt()
+                dto.hotelpropertiesrooms_id(),
+                dto.start_date(),
+                dto.finish_date(),
+                dto.created_at()
         );
     }
 

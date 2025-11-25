@@ -15,26 +15,14 @@ public final class HotelPropertyMapper {
     public static HotelPropertyDTO toDTO(HotelProperty entity) {
         if (entity == null) return null;
 
-        LocalDateTime createdAt = entity.getCreatedAt() == null ? LocalDateTime.now() : entity.getCreatedAt();
-        LocalDateTime updatedAt = entity.getUpdatedAt() == null ? LocalDateTime.now() : entity.getUpdatedAt();
-
-        List<String> photos = entity.getPhotosUrls() == null
-                ? Collections.emptyList()
-                : new ArrayList<>(entity.getPhotosUrls());
-
         return new HotelPropertyDTO(
                 entity.getId(),
                 entity.getName(),
-                entity.getDescription(),
-                entity.getSquareMeters(),
                 entity.getStars(),
-                entity.getPropertyType(),
-                entity.getLocationId(),
+                entity.getProperty_type(),
+                entity.getLocation_id(),
                 entity.getAddress(),
-                entity.getAvailabilityDatesId(),
-                createdAt,
-                updatedAt,
-                photos
+                entity.getImages_id()
         );
     }
 
@@ -43,21 +31,11 @@ public final class HotelPropertyMapper {
 
         HotelProperty entity = new HotelProperty();
         entity.setName(dto.name());
-        entity.setDescription(dto.description());
-        entity.setSquareMeters(dto.squareMeters());
         entity.setStars(dto.stars());
-        entity.setPropertyType(dto.propertyType());
-        entity.setLocationId(dto.locationId());
+        entity.setProperty_type(dto.property_type());
+        entity.setLocation_id(dto.location_id());
         entity.setAddress(dto.address());
-        entity.setAvailabilityDatesId(dto.availabilityDatesId());
-
-        entity.setCreatedAt(dto.createdAt() == null ? LocalDateTime.now() : dto.createdAt());
-        entity.setUpdatedAt(dto.updatedAt() == null ? LocalDateTime.now() : dto.updatedAt());
-
-        List<String> photos = dto.photosUrls() == null
-                ? new ArrayList<>()
-                : new ArrayList<>(dto.photosUrls());
-        entity.setPhotosUrls(photos);
+        entity.setImages_id(dto.images_id());
 
         return entity;
     }

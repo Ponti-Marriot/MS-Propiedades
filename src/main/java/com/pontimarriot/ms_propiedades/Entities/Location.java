@@ -20,35 +20,35 @@ public class Location {
     private UUID id;
 
     @Column(name = "country_code")
-    private String countryCode;
+    private String country_code;
 
     @Column(name = "state")
     private String state;
 
     @Column(name = "city_code")
-    private String cityCode;
+    private String city_code;
 
     @Column(name = "city_name")
-    private String cityName;
+    private String city_name;
 
     @Column(name = "timezone")
     private String timezone;
 
     @Column(name = "subdiv_code")
-    private String subdivCode;
+    private String subdiv_code;
 
     public Location() {
     }
 
-    public Location(UUID id, String countryCode, String state, String cityCode, String cityName,
-                    String timezone, String subdivCode) {
+    public Location(UUID id, String country_code, String state, String city_code, String city_name,
+                    String timezone, String subdiv_code) {
         this.id = id;
-        this.countryCode = countryCode;
+        this.country_code = country_code;
         this.state = state;
-        this.cityCode = cityCode;
-        this.cityName = cityName;
+        this.city_code = city_code;
+        this.city_name = city_name;
         this.timezone = timezone;
-        this.subdivCode = subdivCode;
+        this.subdiv_code = subdiv_code;
     }
 
 }

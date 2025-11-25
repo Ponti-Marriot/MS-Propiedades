@@ -16,7 +16,7 @@ public final class ServiceMapper {
                 entity.getId(),
                 entity.getName(),
                 entity.getCategory(),
-                entity.getDescription()
+                entity.getText()
         );
     }
 
@@ -25,7 +25,7 @@ public final class ServiceMapper {
         return new Service(
                 dto.name(),
                 dto.category(),
-                dto.description()
+                dto.text()
         );
     }
 

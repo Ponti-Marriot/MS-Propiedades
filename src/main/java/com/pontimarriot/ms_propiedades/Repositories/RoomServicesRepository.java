@@ -37,7 +37,7 @@ public class RoomServicesRepository {
     public Flux<RoomServices> findByServiceId(UUID serviceId) {
         return webClient.get()
                 .uri(uriBuilder -> uriBuilder.path("/room-services")
-                        .queryParam("serviceId", serviceId)
+                        .queryParam("service_id", serviceId)
                         .build())
                 .retrieve()
                 .bodyToFlux(RoomServices.class)
@@ -47,7 +47,7 @@ public class RoomServicesRepository {
     public Flux<RoomServices> findByRoomId(UUID roomId) {
         return webClient.get()
                 .uri(uriBuilder -> uriBuilder.path("/room-services")
-                        .queryParam("roomId", roomId)
+                        .queryParam("room_id", roomId)
                         .build())
                 .retrieve()
                 .bodyToFlux(RoomServices.class)

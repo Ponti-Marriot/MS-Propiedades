@@ -1,6 +1,7 @@
 // java
 package com.pontimarriot.ms_propiedades.Repositories;
 
+import com.pontimarriot.ms_propiedades.DTOs.HotelPropertyRoomDTO;
 import com.pontimarriot.ms_propiedades.Entities.HotelPropertyRoom;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
@@ -38,7 +39,7 @@ public class HotelPropertyRoomRepository {
     public Flux<HotelPropertyRoom> findByHotelPropertyId(UUID hotelPropertyId) {
         return webClient.get()
                 .uri(uriBuilder -> uriBuilder.path("/hotel-property-rooms")
-                        .queryParam("hotelPropertyId", hotelPropertyId)
+                        .queryParam("hotel_property_id", hotelPropertyId)
                         .build())
                 .retrieve()
                 .bodyToFlux(HotelPropertyRoom.class)
@@ -48,10 +49,19 @@ public class HotelPropertyRoomRepository {
     public Flux<HotelPropertyRoom> findByRoomId(UUID roomId) {
         return webClient.get()
                 .uri(uriBuilder -> uriBuilder.path("/hotel-property-rooms")
-                        .queryParam("roomId", roomId)
+                        .queryParam("room_id", roomId)
                         .build())
                 .retrieve()
                 .bodyToFlux(HotelPropertyRoom.class)
                 .onErrorResume(e -> Flux.empty());
+    }
+
+    public Mono<HotelPropertyRoom> save(HotelPropertyRoom hotelPropertyRoom) {
+        return webClient.post()
+                .uri("/hotel-property-rooms")
+                .bodyValue(hotelPropertyRoom)
+                .retrieve()
+                .bodyToMono(HotelPropertyRoom.class)
+                .onErrorResume(e -> Mono.empty());
     }
 }

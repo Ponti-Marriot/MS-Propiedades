@@ -14,15 +14,14 @@ public final class RoomMapper {
     public static RoomDTO toDTO(Room entity) {
         if (entity == null) return null;
 
-        LocalDateTime createdAt = entity.getCreatedAt() == null ? LocalDateTime.now() : entity.getCreatedAt();
-        LocalDateTime updatedAt = entity.getUpdatedAt() == null ? LocalDateTime.now() : entity.getUpdatedAt();
+        LocalDateTime createdAt = entity.getCreated_at() == null ? LocalDateTime.now() : entity.getCreated_at();
+        LocalDateTime updatedAt = entity.getUpdated_at() == null ? LocalDateTime.now() : entity.getUpdated_at();
 
         return new RoomDTO(
                 entity.getId(),
                 entity.getTitle(),
                 entity.getDescription(),
-                entity.getRoomType(),
-                entity.getAvailabilityDatesId(),
+                entity.getRoom_type(),
                 createdAt,
                 updatedAt
         );
@@ -34,12 +33,11 @@ public final class RoomMapper {
         Room entity = new Room(
                 dto.title(),
                 dto.description(),
-                dto.roomType(),
-                dto.availabilityDatesId()
+                dto.room_type()
         );
 
-        entity.setCreatedAt(dto.createdAt() == null ? LocalDateTime.now() : dto.createdAt());
-        entity.setUpdatedAt(dto.updatedAt() == null ? LocalDateTime.now() : dto.updatedAt());
+        entity.setCreated_at(dto.created_at() == null ? LocalDateTime.now() : dto.created_at());
+        entity.setUpdated_at(dto.updated_at() == null ? LocalDateTime.now() : dto.updated_at());
 
         return entity;
     }

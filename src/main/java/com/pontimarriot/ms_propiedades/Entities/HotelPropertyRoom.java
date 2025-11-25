@@ -17,24 +17,20 @@ public class HotelPropertyRoom {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    private UUID hotelPropertyId;
-    private UUID roomId;
-    private UUID statusId;
-    private double squareMeters;
+    private UUID hotel_property_id;
+    private UUID room_id;
     private int bedrooms;
     private int bathrooms;
-    private double pricePerNight;
+    private double price_per_night;
 
     public HotelPropertyRoom() {
     }
 
-    public HotelPropertyRoom(UUID hotelPropertyId, UUID roomId, UUID statusId, double squareMeters, int bedrooms, int bathrooms, double pricePerNight) {
-        this.hotelPropertyId = hotelPropertyId;
-        this.roomId = roomId;
-        this.statusId = statusId;
-        this.squareMeters = squareMeters;
+    public HotelPropertyRoom(UUID hotel_property_id, UUID room_id, int bedrooms, int bathrooms, double price_per_night) {
+        this.hotel_property_id = hotel_property_id;
+        this.room_id = room_id;
         this.bedrooms = bedrooms;
         this.bathrooms = bathrooms;
-        this.pricePerNight = pricePerNight;
+        this.price_per_night = price_per_night;
     }
 }
