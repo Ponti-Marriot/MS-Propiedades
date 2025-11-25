@@ -10,11 +10,10 @@ import java.util.stream.Collectors;
 
 public final class HotelPropertyRoomMapper {
 
-    private HotelPropertyRoomMapper() {}
-
     public static HotelPropertyRoomDTO toDTO(HotelPropertyRoom entity) {
         if (entity == null) return null;
         return new HotelPropertyRoomDTO(
+                entity.getId(),
                 entity.getHotelPropertyId(),
                 entity.getRoomId(),
                 entity.getStatusId(),

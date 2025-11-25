@@ -10,11 +10,10 @@ import java.util.stream.Collectors;
 
 public final class ServiceMapper {
 
-    private ServiceMapper() {}
-
     public static ServiceDTO toDTO(Service entity) {
         if (entity == null) return null;
         return new ServiceDTO(
+                entity.getId(),
                 entity.getName(),
                 entity.getCategory(),
                 entity.getDescription()

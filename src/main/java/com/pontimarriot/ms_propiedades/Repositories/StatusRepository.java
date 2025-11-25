@@ -4,10 +4,9 @@ import com.pontimarriot.ms_propiedades.Entities.Status;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -19,46 +18,29 @@ public class StatusRepository {
         this.webClient = webClient;
     }
 
-    public List<Status> findAll() {
-        try {
-            List<Status> list = webClient.get()
-                    .uri("/statuses")
-                    .retrieve()
-                    .bodyToFlux(Status.class)
-                    .collectList()
-                    .block();
-            return list == null ? Collections.emptyList() : list;
-        } catch (Exception ex) {
-            return Collections.emptyList();
-        }
+    public Flux<Status> findAll() {
+        return webClient.get()
+                .uri("/statuses")
+                .retrieve()
+                .bodyToFlux(Status.class)
+                .onErrorResume(e -> Flux.empty());
     }
 
-    public Optional<Status> findById(UUID id) {
-        try {
-            Status status = webClient.get()
-                    .uri("/statuses/{id}", id)
-                    .retrieve()
-                    .bodyToMono(Status.class)
-                    .block();
-            return Optional.ofNullable(status);
-        } catch (Exception ex) {
-            return Optional.empty();
-        }
+    public Mono<Status> findById(UUID id) {
+        return webClient.get()
+                .uri("/statuses/{id}", id)
+                .retrieve()
+                .bodyToMono(Status.class)
+                .onErrorResume(e -> Mono.empty());
     }
 
-    public List<Status> findByName(String name) {
-        try {
-            List<Status> list = webClient.get()
-                    .uri(uriBuilder -> uriBuilder.path("/statuses")
-                            .queryParam("name", name)
-                            .build())
-                    .retrieve()
-                    .bodyToFlux(Status.class)
-                    .collectList()
-                    .block();
-            return list == null ? Collections.emptyList() : list;
-        } catch (Exception ex) {
-            return Collections.emptyList();
-        }
+    public Flux<Status> findByName(String name) {
+        return webClient.get()
+                .uri(uriBuilder -> uriBuilder.path("/statuses")
+                        .queryParam("name", name)
+                        .build())
+                .retrieve()
+                .bodyToFlux(Status.class)
+                .onErrorResume(e -> Flux.empty());
     }
 }

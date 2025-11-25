@@ -11,12 +11,11 @@ import java.util.stream.Collectors;
 
 public final class StatusMapper {
 
-    private StatusMapper() {}
-
     public static StatusDTO toDTO(Status entity) {
         if (entity == null) return null;
         String createdAt = entity.getCreatedAt() == null ? Instant.now().toString() : entity.getCreatedAt();
         return new StatusDTO(
+                entity.getId(),
                 entity.getName(),
                 createdAt
         );

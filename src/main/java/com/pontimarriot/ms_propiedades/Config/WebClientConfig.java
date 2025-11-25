@@ -18,7 +18,7 @@ public class WebClientConfig {
 
     @Bean
     @Qualifier("propertiesWebClient")
-    public WebClient availabilityWebClient(@Value("${external.properties.base-url:http://localhost:8081}") String baseUrl,
+    public WebClient availabilityWebClient(@Value("${external.properties.base-url:http://localhost:8088}") String baseUrl,
                                            ObjectMapper mapper) {
         // ensure Java Time module registered so LocalDate/LocalDateTime deserialize correctly
         mapper.registerModule(new JavaTimeModule());

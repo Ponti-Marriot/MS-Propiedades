@@ -11,8 +11,6 @@ import java.util.stream.Collectors;
 
 public final class RoomMapper {
 
-    private RoomMapper() {}
-
     public static RoomDTO toDTO(Room entity) {
         if (entity == null) return null;
 
@@ -20,6 +18,7 @@ public final class RoomMapper {
         LocalDateTime updatedAt = entity.getUpdatedAt() == null ? LocalDateTime.now() : entity.getUpdatedAt();
 
         return new RoomDTO(
+                entity.getId(),
                 entity.getTitle(),
                 entity.getDescription(),
                 entity.getRoomType(),

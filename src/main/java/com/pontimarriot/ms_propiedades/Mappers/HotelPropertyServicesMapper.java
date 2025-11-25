@@ -11,12 +11,11 @@ import java.util.stream.Collectors;
 
 public final class HotelPropertyServicesMapper {
 
-    private HotelPropertyServicesMapper() {}
-
     public static HotelPropertyServicesDTO toDTO(HotelPropertyServices entity) {
         if (entity == null) return null;
         String createdAt = entity.getCreatedAt() == null ? Instant.now().toString() : entity.getCreatedAt();
         return new HotelPropertyServicesDTO(
+                entity.getId(),
                 entity.getServiceId(),
                 entity.getHotelPropertyId(),
                 createdAt

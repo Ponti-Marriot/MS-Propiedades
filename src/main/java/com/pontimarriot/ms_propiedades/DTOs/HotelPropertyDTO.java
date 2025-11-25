@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 public record HotelPropertyDTO(
+        UUID id,
         String name,
         String description,
         int squareMeters,

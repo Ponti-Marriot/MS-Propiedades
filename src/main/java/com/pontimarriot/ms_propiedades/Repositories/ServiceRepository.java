@@ -5,10 +5,9 @@ import com.pontimarriot.ms_propiedades.Entities.Service;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -20,62 +19,39 @@ public class ServiceRepository {
         this.webClient = webClient;
     }
 
-    public List<Service> findAll() {
-        try {
-            List<Service> list = webClient.get()
-                    .uri("/services")
-                    .retrieve()
-                    .bodyToFlux(Service.class)
-                    .collectList()
-                    .block();
-            return list == null ? Collections.emptyList() : list;
-        } catch (Exception ex) {
-            return Collections.emptyList();
-        }
+    public Flux<Service> findAll() {
+        return webClient.get()
+                .uri("/services")
+                .retrieve()
+                .bodyToFlux(Service.class)
+                .onErrorResume(e -> Flux.empty());
     }
 
-    public Optional<Service> findById(UUID id) {
-        try {
-            Service svc = webClient.get()
-                    .uri("/services/{id}", id)
-                    .retrieve()
-                    .bodyToMono(Service.class)
-                    .block();
-            return Optional.ofNullable(svc);
-        } catch (Exception ex) {
-            return Optional.empty();
-        }
+    public Mono<Service> findById(UUID id) {
+        return webClient.get()
+                .uri("/services/{id}", id)
+                .retrieve()
+                .bodyToMono(Service.class)
+                .onErrorResume(e -> Mono.empty());
     }
 
-    public List<Service> findByCategory(String category) {
-        try {
-            List<Service> list = webClient.get()
-                    .uri(uriBuilder -> uriBuilder.path("/services")
-                            .queryParam("category", category)
-                            .build())
-                    .retrieve()
-                    .bodyToFlux(Service.class)
-                    .collectList()
-                    .block();
-            return list == null ? Collections.emptyList() : list;
-        } catch (Exception ex) {
-            return Collections.emptyList();
-        }
+    public Flux<Service> findByCategory(String category) {
+        return webClient.get()
+                .uri(uriBuilder -> uriBuilder.path("/services")
+                        .queryParam("category", category)
+                        .build())
+                .retrieve()
+                .bodyToFlux(Service.class)
+                .onErrorResume(e -> Flux.empty());
     }
 
-    public List<Service> findByName(String name) {
-        try {
-            List<Service> list = webClient.get()
-                    .uri(uriBuilder -> uriBuilder.path("/services")
-                            .queryParam("name", name)
-                            .build())
-                    .retrieve()
-                    .bodyToFlux(Service.class)
-                    .collectList()
-                    .block();
-            return list == null ? Collections.emptyList() : list;
-        } catch (Exception ex) {
-            return Collections.emptyList();
-        }
+    public Flux<Service> findByName(String name) {
+        return webClient.get()
+                .uri(uriBuilder -> uriBuilder.path("/services")
+                        .queryParam("name", name)
+                        .build())
+                .retrieve()
+                .bodyToFlux(Service.class)
+                .onErrorResume(e -> Flux.empty());
     }
 }

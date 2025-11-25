@@ -11,12 +11,11 @@ import java.util.stream.Collectors;
 
 public final class RoomServicesMapper {
 
-    private RoomServicesMapper() {}
-
     public static RoomServicesDTO toDTO(RoomServices entity) {
         if (entity == null) return null;
         String createdAt = entity.getCreatedAt() == null ? Instant.now().toString() : entity.getCreatedAt();
         return new RoomServicesDTO(
+                entity.getId(),
                 entity.getServiceId(),
                 entity.getRoomId(),
                 createdAt

@@ -12,8 +12,6 @@ import java.util.stream.Collectors;
 
 public final class HotelPropertyMapper {
 
-    private HotelPropertyMapper() {}
-
     public static HotelPropertyDTO toDTO(HotelProperty entity) {
         if (entity == null) return null;
 
@@ -25,6 +23,7 @@ public final class HotelPropertyMapper {
                 : new ArrayList<>(entity.getPhotosUrls());
 
         return new HotelPropertyDTO(
+                entity.getId(),
                 entity.getName(),
                 entity.getDescription(),
                 entity.getSquareMeters(),

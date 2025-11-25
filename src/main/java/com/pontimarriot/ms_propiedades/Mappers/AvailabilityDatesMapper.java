@@ -10,11 +10,10 @@ import java.util.stream.Collectors;
 
 public final class AvailabilityDatesMapper {
 
-    private AvailabilityDatesMapper() {}
-
     public static AvailabilityDatesDTO toDTO(AvailabilityDates entity) {
         if (entity == null) return null;
         return new AvailabilityDatesDTO(
+                entity.getId(),
                 entity.getRoomId(),
                 entity.getStartDate(),
                 entity.getEndDate(),

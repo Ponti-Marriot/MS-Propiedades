@@ -4,10 +4,9 @@ import com.pontimarriot.ms_propiedades.Entities.Room;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -19,46 +18,38 @@ public class RoomRepository {
         this.webClient = webClient;
     }
 
-    public List<Room> findAll() {
-        try {
-            List<Room> list = webClient.get()
-                    .uri("/rooms")
-                    .retrieve()
-                    .bodyToFlux(Room.class)
-                    .collectList()
-                    .block();
-            return list == null ? Collections.emptyList() : list;
-        } catch (Exception ex) {
-            return Collections.emptyList();
-        }
+    public Flux<Room> findAll() {
+        return webClient.get()
+                .uri("/rooms")
+                .retrieve()
+                .bodyToFlux(Room.class)
+                .onErrorResume(e -> Flux.empty());
     }
 
-    public Optional<Room> findById(UUID id) {
-        try {
-            Room room = webClient.get()
-                    .uri("/rooms/{id}", id)
-                    .retrieve()
-                    .bodyToMono(Room.class)
-                    .block();
-            return Optional.ofNullable(room);
-        } catch (Exception ex) {
-            return Optional.empty();
-        }
+    public Mono<Room> findById(UUID id) {
+        return webClient.get()
+                .uri("/rooms/{id}", id)
+                .retrieve()
+                .bodyToMono(Room.class)
+                .onErrorResume(e -> Mono.empty());
     }
 
-    public List<Room> findByAvailabilityDatesId(UUID availabilityDatesId) {
-        try {
-            List<Room> list = webClient.get()
-                    .uri(uriBuilder -> uriBuilder.path("/rooms")
-                            .queryParam("availabilityDatesId", availabilityDatesId)
-                            .build())
-                    .retrieve()
-                    .bodyToFlux(Room.class)
-                    .collectList()
-                    .block();
-            return list == null ? Collections.emptyList() : list;
-        } catch (Exception ex) {
-            return Collections.emptyList();
-        }
+    public Flux<Room> findByAvailabilityDatesId(UUID availabilityDatesId) {
+        return webClient.get()
+                .uri(uriBuilder -> uriBuilder.path("/rooms")
+                        .queryParam("availabilityDatesId", availabilityDatesId)
+                        .build())
+                .retrieve()
+                .bodyToFlux(Room.class)
+                .onErrorResume(e -> Flux.empty());
+    }
+
+    public Mono<Room> save(Room room) {
+        return webClient.post()
+                .uri("/rooms")
+                .bodyValue(room)
+                .retrieve()
+                .bodyToMono(Room.class)
+                .onErrorResume(e -> Mono.empty());
     }
 }
